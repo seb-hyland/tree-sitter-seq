@@ -7,11 +7,11 @@
 #endif
 
 #define LANGUAGE_VERSION 15
-#define STATE_COUNT 24
+#define STATE_COUNT 31
 #define LARGE_STATE_COUNT 2
-#define SYMBOL_COUNT 19
+#define SYMBOL_COUNT 23
 #define ALIAS_COUNT 0
-#define TOKEN_COUNT 7
+#define TOKEN_COUNT 8
 #define EXTERNAL_TOKEN_COUNT 0
 #define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 4
@@ -20,43 +20,51 @@
 #define SUPERTYPE_COUNT 0
 
 enum ts_symbol_identifiers {
-  aux_sym_fasta_header_token1 = 1,
-  aux_sym_fasta_sequence_line_token1 = 2,
-  aux_sym_fastq_header_token1 = 3,
-  aux_sym_fastq_plus_line_token1 = 4,
-  aux_sym_fastq_quality_line_token1 = 5,
-  sym_eol = 6,
-  sym_source_file = 7,
-  sym__record = 8,
-  sym_fasta_record = 9,
-  sym_fasta_header = 10,
-  sym_fasta_sequence_line = 11,
-  sym_fastq_record = 12,
-  sym_fastq_header = 13,
-  sym_fastq_sequence_line = 14,
-  sym_fastq_plus_line = 15,
-  sym_fastq_quality_line = 16,
-  aux_sym_source_file_repeat1 = 17,
-  aux_sym_fasta_record_repeat1 = 18,
+  sym_fasta_header_prefix = 1,
+  aux_sym_fasta_header_content_token1 = 2,
+  aux_sym_fasta_sequence_line_token1 = 3,
+  sym_fastq_header_prefix = 4,
+  sym_fastq_plus_prefix = 5,
+  aux_sym_fastq_quality_line_token1 = 6,
+  sym_eol = 7,
+  sym_source_file = 8,
+  sym__record = 9,
+  sym_fasta_record = 10,
+  sym_fasta_header = 11,
+  sym_fasta_header_content = 12,
+  sym_fasta_sequence_line = 13,
+  sym_fastq_record = 14,
+  sym_fastq_header = 15,
+  sym_fastq_header_content = 16,
+  sym_fastq_sequence_line = 17,
+  sym_fastq_plus_line = 18,
+  sym_fastq_plus_content = 19,
+  sym_fastq_quality_line = 20,
+  aux_sym_source_file_repeat1 = 21,
+  aux_sym_fasta_record_repeat1 = 22,
 };
 
 static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
-  [aux_sym_fasta_header_token1] = "fasta_header_token1",
+  [sym_fasta_header_prefix] = "fasta_header_prefix",
+  [aux_sym_fasta_header_content_token1] = "fasta_header_content_token1",
   [aux_sym_fasta_sequence_line_token1] = "fasta_sequence_line_token1",
-  [aux_sym_fastq_header_token1] = "fastq_header_token1",
-  [aux_sym_fastq_plus_line_token1] = "fastq_plus_line_token1",
+  [sym_fastq_header_prefix] = "fastq_header_prefix",
+  [sym_fastq_plus_prefix] = "fastq_plus_prefix",
   [aux_sym_fastq_quality_line_token1] = "fastq_quality_line_token1",
   [sym_eol] = "eol",
   [sym_source_file] = "source_file",
   [sym__record] = "_record",
   [sym_fasta_record] = "fasta_record",
   [sym_fasta_header] = "fasta_header",
+  [sym_fasta_header_content] = "fasta_header_content",
   [sym_fasta_sequence_line] = "fasta_sequence_line",
   [sym_fastq_record] = "fastq_record",
   [sym_fastq_header] = "fastq_header",
+  [sym_fastq_header_content] = "fastq_header_content",
   [sym_fastq_sequence_line] = "fastq_sequence_line",
   [sym_fastq_plus_line] = "fastq_plus_line",
+  [sym_fastq_plus_content] = "fastq_plus_content",
   [sym_fastq_quality_line] = "fastq_quality_line",
   [aux_sym_source_file_repeat1] = "source_file_repeat1",
   [aux_sym_fasta_record_repeat1] = "fasta_record_repeat1",
@@ -64,21 +72,25 @@ static const char * const ts_symbol_names[] = {
 
 static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
-  [aux_sym_fasta_header_token1] = aux_sym_fasta_header_token1,
+  [sym_fasta_header_prefix] = sym_fasta_header_prefix,
+  [aux_sym_fasta_header_content_token1] = aux_sym_fasta_header_content_token1,
   [aux_sym_fasta_sequence_line_token1] = aux_sym_fasta_sequence_line_token1,
-  [aux_sym_fastq_header_token1] = aux_sym_fastq_header_token1,
-  [aux_sym_fastq_plus_line_token1] = aux_sym_fastq_plus_line_token1,
+  [sym_fastq_header_prefix] = sym_fastq_header_prefix,
+  [sym_fastq_plus_prefix] = sym_fastq_plus_prefix,
   [aux_sym_fastq_quality_line_token1] = aux_sym_fastq_quality_line_token1,
   [sym_eol] = sym_eol,
   [sym_source_file] = sym_source_file,
   [sym__record] = sym__record,
   [sym_fasta_record] = sym_fasta_record,
   [sym_fasta_header] = sym_fasta_header,
+  [sym_fasta_header_content] = sym_fasta_header_content,
   [sym_fasta_sequence_line] = sym_fasta_sequence_line,
   [sym_fastq_record] = sym_fastq_record,
   [sym_fastq_header] = sym_fastq_header,
+  [sym_fastq_header_content] = sym_fastq_header_content,
   [sym_fastq_sequence_line] = sym_fastq_sequence_line,
   [sym_fastq_plus_line] = sym_fastq_plus_line,
+  [sym_fastq_plus_content] = sym_fastq_plus_content,
   [sym_fastq_quality_line] = sym_fastq_quality_line,
   [aux_sym_source_file_repeat1] = aux_sym_source_file_repeat1,
   [aux_sym_fasta_record_repeat1] = aux_sym_fasta_record_repeat1,
@@ -89,7 +101,11 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [aux_sym_fasta_header_token1] = {
+  [sym_fasta_header_prefix] = {
+    .visible = true,
+    .named = true,
+  },
+  [aux_sym_fasta_header_content_token1] = {
     .visible = false,
     .named = false,
   },
@@ -97,13 +113,13 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
-  [aux_sym_fastq_header_token1] = {
-    .visible = false,
-    .named = false,
+  [sym_fastq_header_prefix] = {
+    .visible = true,
+    .named = true,
   },
-  [aux_sym_fastq_plus_line_token1] = {
-    .visible = false,
-    .named = false,
+  [sym_fastq_plus_prefix] = {
+    .visible = true,
+    .named = true,
   },
   [aux_sym_fastq_quality_line_token1] = {
     .visible = false,
@@ -129,6 +145,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [sym_fasta_header_content] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_fasta_sequence_line] = {
     .visible = true,
     .named = true,
@@ -141,11 +161,19 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [sym_fastq_header_content] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_fastq_sequence_line] = {
     .visible = true,
     .named = true,
   },
   [sym_fastq_plus_line] = {
+    .visible = true,
+    .named = true,
+  },
+  [sym_fastq_plus_content] = {
     .visible = true,
     .named = true,
   },
@@ -196,6 +224,13 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
   [21] = 21,
   [22] = 22,
   [23] = 23,
+  [24] = 24,
+  [25] = 25,
+  [26] = 26,
+  [27] = 27,
+  [28] = 28,
+  [29] = 29,
+  [30] = 30,
 };
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -203,90 +238,55 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   eof = lexer->eof(lexer);
   switch (state) {
     case 0:
-      if (eof) ADVANCE(4);
-      if (lookahead == '\n') ADVANCE(14);
+      if (eof) ADVANCE(3);
+      if (lookahead == '\n') ADVANCE(11);
       if (lookahead == '\r') ADVANCE(1);
-      if (lookahead == '+') ADVANCE(11);
-      if (lookahead == '>') ADVANCE(5);
-      if (lookahead == '@') ADVANCE(9);
-      if (('!' <= lookahead && lookahead <= '?') ||
-          ('[' <= lookahead && lookahead <= '`') ||
-          ('{' <= lookahead && lookahead <= '~')) ADVANCE(13);
-      if (('A' <= lookahead && lookahead <= 'z')) ADVANCE(7);
+      if (lookahead == '+') ADVANCE(9);
+      if (lookahead == '>') ADVANCE(4);
+      if (lookahead == '@') ADVANCE(8);
+      if (('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
       END_STATE();
     case 1:
-      if (lookahead == '\n') ADVANCE(14);
+      if (lookahead == '\n') ADVANCE(11);
       END_STATE();
     case 2:
-      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(13);
+      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(10);
       END_STATE();
     case 3:
-      if (eof) ADVANCE(4);
-      if (lookahead == '+') ADVANCE(12);
-      if (lookahead == '>') ADVANCE(6);
-      if (lookahead == '@') ADVANCE(10);
-      if (('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(8);
-      END_STATE();
-    case 4:
       ACCEPT_TOKEN(ts_builtin_sym_end);
       END_STATE();
+    case 4:
+      ACCEPT_TOKEN(sym_fasta_header_prefix);
+      END_STATE();
     case 5:
-      ACCEPT_TOKEN(aux_sym_fasta_header_token1);
-      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(5);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(6);
+      ACCEPT_TOKEN(aux_sym_fasta_header_content_token1);
+      if (lookahead == '\n') ADVANCE(11);
+      if (lookahead == '\r') ADVANCE(1);
+      if (lookahead != 0) ADVANCE(6);
       END_STATE();
     case 6:
-      ACCEPT_TOKEN(aux_sym_fasta_header_token1);
+      ACCEPT_TOKEN(aux_sym_fasta_header_content_token1);
       if (lookahead != 0 &&
           lookahead != '\n' &&
           lookahead != '\r') ADVANCE(6);
       END_STATE();
     case 7:
       ACCEPT_TOKEN(aux_sym_fasta_sequence_line_token1);
-      if (('!' <= lookahead && lookahead <= '@') ||
-          ('[' <= lookahead && lookahead <= '`') ||
-          ('{' <= lookahead && lookahead <= '~')) ADVANCE(13);
-      if (('A' <= lookahead && lookahead <= 'z')) ADVANCE(7);
+      if (('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(7);
       END_STATE();
     case 8:
-      ACCEPT_TOKEN(aux_sym_fasta_sequence_line_token1);
-      if (('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(8);
+      ACCEPT_TOKEN(sym_fastq_header_prefix);
       END_STATE();
     case 9:
-      ACCEPT_TOKEN(aux_sym_fastq_header_token1);
-      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(9);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(10);
+      ACCEPT_TOKEN(sym_fastq_plus_prefix);
       END_STATE();
     case 10:
-      ACCEPT_TOKEN(aux_sym_fastq_header_token1);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(10);
+      ACCEPT_TOKEN(aux_sym_fastq_quality_line_token1);
+      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(10);
       END_STATE();
     case 11:
-      ACCEPT_TOKEN(aux_sym_fastq_plus_line_token1);
-      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(11);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(12);
-      END_STATE();
-    case 12:
-      ACCEPT_TOKEN(aux_sym_fastq_plus_line_token1);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(12);
-      END_STATE();
-    case 13:
-      ACCEPT_TOKEN(aux_sym_fastq_quality_line_token1);
-      if (('!' <= lookahead && lookahead <= '~')) ADVANCE(13);
-      END_STATE();
-    case 14:
       ACCEPT_TOKEN(sym_eol);
       END_STATE();
     default:
@@ -296,66 +296,72 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
 
 static const TSLexerMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0},
-  [1] = {.lex_state = 3},
-  [2] = {.lex_state = 3},
-  [3] = {.lex_state = 3},
-  [4] = {.lex_state = 3},
-  [5] = {.lex_state = 3},
-  [6] = {.lex_state = 3},
-  [7] = {.lex_state = 3},
-  [8] = {.lex_state = 3},
-  [9] = {.lex_state = 3},
-  [10] = {.lex_state = 3},
-  [11] = {.lex_state = 2},
-  [12] = {.lex_state = 3},
-  [13] = {.lex_state = 0},
-  [14] = {.lex_state = 0},
+  [1] = {.lex_state = 0},
+  [2] = {.lex_state = 0},
+  [3] = {.lex_state = 0},
+  [4] = {.lex_state = 0},
+  [5] = {.lex_state = 0},
+  [6] = {.lex_state = 0},
+  [7] = {.lex_state = 0},
+  [8] = {.lex_state = 5},
+  [9] = {.lex_state = 0},
+  [10] = {.lex_state = 0},
+  [11] = {.lex_state = 6},
+  [12] = {.lex_state = 0},
+  [13] = {.lex_state = 6},
+  [14] = {.lex_state = 2},
   [15] = {.lex_state = 0},
-  [16] = {.lex_state = 3},
-  [17] = {.lex_state = 3},
+  [16] = {.lex_state = 0},
+  [17] = {.lex_state = 0},
   [18] = {.lex_state = 0},
   [19] = {.lex_state = 0},
   [20] = {.lex_state = 0},
-  [21] = {.lex_state = 3},
-  [22] = {.lex_state = 2},
+  [21] = {.lex_state = 0},
+  [22] = {.lex_state = 0},
   [23] = {.lex_state = 0},
+  [24] = {.lex_state = 0},
+  [25] = {.lex_state = 0},
+  [26] = {.lex_state = 0},
+  [27] = {.lex_state = 2},
+  [28] = {.lex_state = 0},
+  [29] = {.lex_state = 0},
+  [30] = {.lex_state = 2},
 };
 
 static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [STATE(0)] = {
     [ts_builtin_sym_end] = ACTIONS(1),
-    [aux_sym_fasta_header_token1] = ACTIONS(1),
+    [sym_fasta_header_prefix] = ACTIONS(1),
     [aux_sym_fasta_sequence_line_token1] = ACTIONS(1),
-    [aux_sym_fastq_header_token1] = ACTIONS(1),
-    [aux_sym_fastq_plus_line_token1] = ACTIONS(1),
-    [aux_sym_fastq_quality_line_token1] = ACTIONS(1),
+    [sym_fastq_header_prefix] = ACTIONS(1),
+    [sym_fastq_plus_prefix] = ACTIONS(1),
     [sym_eol] = ACTIONS(1),
   },
   [STATE(1)] = {
-    [sym_source_file] = STATE(15),
+    [sym_source_file] = STATE(16),
     [sym__record] = STATE(2),
     [sym_fasta_record] = STATE(2),
     [sym_fasta_header] = STATE(7),
     [sym_fastq_record] = STATE(2),
-    [sym_fastq_header] = STATE(10),
+    [sym_fastq_header] = STATE(12),
     [aux_sym_source_file_repeat1] = STATE(2),
     [ts_builtin_sym_end] = ACTIONS(3),
-    [aux_sym_fasta_header_token1] = ACTIONS(5),
-    [aux_sym_fastq_header_token1] = ACTIONS(7),
+    [sym_fasta_header_prefix] = ACTIONS(5),
+    [sym_fastq_header_prefix] = ACTIONS(7),
   },
 };
 
 static const uint16_t ts_small_parse_table[] = {
   [0] = 6,
     ACTIONS(5), 1,
-      aux_sym_fasta_header_token1,
+      sym_fasta_header_prefix,
     ACTIONS(7), 1,
-      aux_sym_fastq_header_token1,
+      sym_fastq_header_prefix,
     ACTIONS(9), 1,
       ts_builtin_sym_end,
     STATE(7), 1,
       sym_fasta_header,
-    STATE(10), 1,
+    STATE(12), 1,
       sym_fastq_header,
     STATE(3), 4,
       sym__record,
@@ -366,12 +372,12 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(11), 1,
       ts_builtin_sym_end,
     ACTIONS(13), 1,
-      aux_sym_fasta_header_token1,
+      sym_fasta_header_prefix,
     ACTIONS(16), 1,
-      aux_sym_fastq_header_token1,
+      sym_fastq_header_prefix,
     STATE(7), 1,
       sym_fasta_header,
-    STATE(10), 1,
+    STATE(12), 1,
       sym_fastq_header,
     STATE(3), 4,
       sym__record,
@@ -386,8 +392,8 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_fasta_record_repeat1,
     ACTIONS(19), 3,
       ts_builtin_sym_end,
-      aux_sym_fasta_header_token1,
-      aux_sym_fastq_header_token1,
+      sym_fasta_header_prefix,
+      sym_fastq_header_prefix,
   [57] = 3,
     ACTIONS(25), 1,
       aux_sym_fasta_sequence_line_token1,
@@ -396,78 +402,107 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_fasta_record_repeat1,
     ACTIONS(23), 3,
       ts_builtin_sym_end,
-      aux_sym_fasta_header_token1,
-      aux_sym_fastq_header_token1,
+      sym_fasta_header_prefix,
+      sym_fastq_header_prefix,
   [70] = 1,
     ACTIONS(28), 4,
       ts_builtin_sym_end,
-      aux_sym_fasta_header_token1,
+      sym_fasta_header_prefix,
       aux_sym_fasta_sequence_line_token1,
-      aux_sym_fastq_header_token1,
+      sym_fastq_header_prefix,
   [77] = 2,
     ACTIONS(21), 1,
       aux_sym_fasta_sequence_line_token1,
     STATE(4), 2,
       sym_fasta_sequence_line,
       aux_sym_fasta_record_repeat1,
-  [85] = 1,
-    ACTIONS(30), 3,
+  [85] = 3,
+    ACTIONS(30), 1,
+      aux_sym_fasta_header_content_token1,
+    ACTIONS(32), 1,
+      sym_eol,
+    STATE(28), 1,
+      sym_fastq_plus_content,
+  [95] = 1,
+    ACTIONS(34), 3,
       ts_builtin_sym_end,
-      aux_sym_fasta_header_token1,
-      aux_sym_fastq_header_token1,
-  [91] = 1,
-    ACTIONS(32), 3,
+      sym_fasta_header_prefix,
+      sym_fastq_header_prefix,
+  [101] = 1,
+    ACTIONS(36), 3,
       ts_builtin_sym_end,
-      aux_sym_fasta_header_token1,
-      aux_sym_fastq_header_token1,
-  [97] = 2,
-    ACTIONS(34), 1,
-      aux_sym_fasta_sequence_line_token1,
-    STATE(12), 1,
-      sym_fastq_sequence_line,
-  [104] = 2,
-    ACTIONS(36), 1,
-      aux_sym_fastq_quality_line_token1,
-    STATE(8), 1,
-      sym_fastq_quality_line,
-  [111] = 2,
+      sym_fasta_header_prefix,
+      sym_fastq_header_prefix,
+  [107] = 2,
     ACTIONS(38), 1,
-      aux_sym_fastq_plus_line_token1,
-    STATE(11), 1,
-      sym_fastq_plus_line,
-  [118] = 1,
+      aux_sym_fasta_header_content_token1,
+    STATE(18), 1,
+      sym_fasta_header_content,
+  [114] = 2,
     ACTIONS(40), 1,
-      sym_eol,
-  [122] = 1,
+      aux_sym_fasta_sequence_line_token1,
+    STATE(15), 1,
+      sym_fastq_sequence_line,
+  [121] = 2,
     ACTIONS(42), 1,
-      sym_eol,
-  [126] = 1,
+      aux_sym_fasta_header_content_token1,
+    STATE(20), 1,
+      sym_fastq_header_content,
+  [128] = 2,
     ACTIONS(44), 1,
-      ts_builtin_sym_end,
-  [130] = 1,
+      aux_sym_fastq_quality_line_token1,
+    STATE(9), 1,
+      sym_fastq_quality_line,
+  [135] = 2,
     ACTIONS(46), 1,
-      aux_sym_fasta_sequence_line_token1,
-  [134] = 1,
+      sym_fastq_plus_prefix,
+    STATE(14), 1,
+      sym_fastq_plus_line,
+  [142] = 1,
     ACTIONS(48), 1,
-      aux_sym_fasta_sequence_line_token1,
-  [138] = 1,
+      ts_builtin_sym_end,
+  [146] = 1,
     ACTIONS(50), 1,
       sym_eol,
-  [142] = 1,
+  [150] = 1,
     ACTIONS(52), 1,
       sym_eol,
-  [146] = 1,
+  [154] = 1,
     ACTIONS(54), 1,
       sym_eol,
-  [150] = 1,
-    ACTIONS(56), 1,
-      aux_sym_fastq_plus_line_token1,
-  [154] = 1,
-    ACTIONS(58), 1,
-      aux_sym_fastq_quality_line_token1,
   [158] = 1,
+    ACTIONS(56), 1,
+      sym_eol,
+  [162] = 1,
+    ACTIONS(58), 1,
+      sym_eol,
+  [166] = 1,
     ACTIONS(60), 1,
       sym_eol,
+  [170] = 1,
+    ACTIONS(62), 1,
+      aux_sym_fasta_sequence_line_token1,
+  [174] = 1,
+    ACTIONS(64), 1,
+      aux_sym_fasta_sequence_line_token1,
+  [178] = 1,
+    ACTIONS(66), 1,
+      sym_fastq_plus_prefix,
+  [182] = 1,
+    ACTIONS(68), 1,
+      sym_eol,
+  [186] = 1,
+    ACTIONS(70), 1,
+      aux_sym_fastq_quality_line_token1,
+  [190] = 1,
+    ACTIONS(72), 1,
+      sym_eol,
+  [194] = 1,
+    ACTIONS(74), 1,
+      sym_eol,
+  [198] = 1,
+    ACTIONS(76), 1,
+      aux_sym_fastq_quality_line_token1,
 };
 
 static const uint32_t ts_small_parse_table_map[] = {
@@ -478,54 +513,69 @@ static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(6)] = 70,
   [SMALL_STATE(7)] = 77,
   [SMALL_STATE(8)] = 85,
-  [SMALL_STATE(9)] = 91,
-  [SMALL_STATE(10)] = 97,
-  [SMALL_STATE(11)] = 104,
-  [SMALL_STATE(12)] = 111,
-  [SMALL_STATE(13)] = 118,
-  [SMALL_STATE(14)] = 122,
-  [SMALL_STATE(15)] = 126,
-  [SMALL_STATE(16)] = 130,
-  [SMALL_STATE(17)] = 134,
-  [SMALL_STATE(18)] = 138,
-  [SMALL_STATE(19)] = 142,
-  [SMALL_STATE(20)] = 146,
-  [SMALL_STATE(21)] = 150,
-  [SMALL_STATE(22)] = 154,
-  [SMALL_STATE(23)] = 158,
+  [SMALL_STATE(9)] = 95,
+  [SMALL_STATE(10)] = 101,
+  [SMALL_STATE(11)] = 107,
+  [SMALL_STATE(12)] = 114,
+  [SMALL_STATE(13)] = 121,
+  [SMALL_STATE(14)] = 128,
+  [SMALL_STATE(15)] = 135,
+  [SMALL_STATE(16)] = 142,
+  [SMALL_STATE(17)] = 146,
+  [SMALL_STATE(18)] = 150,
+  [SMALL_STATE(19)] = 154,
+  [SMALL_STATE(20)] = 158,
+  [SMALL_STATE(21)] = 162,
+  [SMALL_STATE(22)] = 166,
+  [SMALL_STATE(23)] = 170,
+  [SMALL_STATE(24)] = 174,
+  [SMALL_STATE(25)] = 178,
+  [SMALL_STATE(26)] = 182,
+  [SMALL_STATE(27)] = 186,
+  [SMALL_STATE(28)] = 190,
+  [SMALL_STATE(29)] = 194,
+  [SMALL_STATE(30)] = 198,
 };
 
 static const TSParseActionEntry ts_parse_actions[] = {
   [0] = {.entry = {.count = 0, .reusable = false}},
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_source_file, 0, 0, 0),
-  [5] = {.entry = {.count = 1, .reusable = true}}, SHIFT(14),
+  [5] = {.entry = {.count = 1, .reusable = true}}, SHIFT(11),
   [7] = {.entry = {.count = 1, .reusable = true}}, SHIFT(13),
   [9] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_source_file, 1, 0, 0),
   [11] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0),
-  [13] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(14),
+  [13] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(11),
   [16] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(13),
   [19] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fasta_record, 2, 0, 0),
-  [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(18),
+  [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(21),
   [23] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_fasta_record_repeat1, 2, 0, 0),
-  [25] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_fasta_record_repeat1, 2, 0, 0), SHIFT_REPEAT(18),
+  [25] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_fasta_record_repeat1, 2, 0, 0), SHIFT_REPEAT(21),
   [28] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fasta_sequence_line, 2, 0, 0),
-  [30] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_record, 4, 0, 0),
-  [32] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_quality_line, 2, 0, 0),
-  [34] = {.entry = {.count = 1, .reusable = true}}, SHIFT(19),
-  [36] = {.entry = {.count = 1, .reusable = true}}, SHIFT(23),
-  [38] = {.entry = {.count = 1, .reusable = true}}, SHIFT(20),
-  [40] = {.entry = {.count = 1, .reusable = true}}, SHIFT(17),
-  [42] = {.entry = {.count = 1, .reusable = true}}, SHIFT(16),
-  [44] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
-  [46] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fasta_header, 2, 0, 0),
-  [48] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_header, 2, 0, 0),
-  [50] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
-  [52] = {.entry = {.count = 1, .reusable = true}}, SHIFT(21),
-  [54] = {.entry = {.count = 1, .reusable = true}}, SHIFT(22),
-  [56] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_sequence_line, 2, 0, 0),
-  [58] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_plus_line, 2, 0, 0),
-  [60] = {.entry = {.count = 1, .reusable = true}}, SHIFT(9),
+  [30] = {.entry = {.count = 1, .reusable = false}}, SHIFT(26),
+  [32] = {.entry = {.count = 1, .reusable = true}}, SHIFT(27),
+  [34] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_record, 4, 0, 0),
+  [36] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_quality_line, 2, 0, 0),
+  [38] = {.entry = {.count = 1, .reusable = true}}, SHIFT(17),
+  [40] = {.entry = {.count = 1, .reusable = true}}, SHIFT(22),
+  [42] = {.entry = {.count = 1, .reusable = true}}, SHIFT(19),
+  [44] = {.entry = {.count = 1, .reusable = true}}, SHIFT(29),
+  [46] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
+  [48] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
+  [50] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fasta_header_content, 1, 0, 0),
+  [52] = {.entry = {.count = 1, .reusable = true}}, SHIFT(23),
+  [54] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_header_content, 1, 0, 0),
+  [56] = {.entry = {.count = 1, .reusable = true}}, SHIFT(24),
+  [58] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
+  [60] = {.entry = {.count = 1, .reusable = true}}, SHIFT(25),
+  [62] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fasta_header, 3, 0, 0),
+  [64] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_header, 3, 0, 0),
+  [66] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_sequence_line, 2, 0, 0),
+  [68] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_plus_content, 1, 0, 0),
+  [70] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_plus_line, 2, 0, 0),
+  [72] = {.entry = {.count = 1, .reusable = true}}, SHIFT(30),
+  [74] = {.entry = {.count = 1, .reusable = true}}, SHIFT(10),
+  [76] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_fastq_plus_line, 3, 0, 0),
 };
 
 #ifdef __cplusplus
@@ -539,7 +589,7 @@ extern "C" {
 #define TS_PUBLIC __attribute__((visibility("default")))
 #endif
 
-TS_PUBLIC const TSLanguage *tree_sitter_tree_sitter_seq(void) {
+TS_PUBLIC const TSLanguage *tree_sitter_seq(void) {
   static const TSLanguage language = {
     .abi_version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
@@ -564,7 +614,7 @@ TS_PUBLIC const TSLanguage *tree_sitter_tree_sitter_seq(void) {
     .lex_modes = (const void*)ts_lex_modes,
     .lex_fn = ts_lex,
     .primary_state_ids = ts_primary_state_ids,
-    .name = "tree_sitter_seq",
+    .name = "seq",
     .max_reserved_word_set_size = 0,
     .metadata = {
       .major_version = 0,

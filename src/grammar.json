@@ -1,6 +1,6 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
-  "name": "tree_sitter_seq",
+  "name": "seq",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -42,26 +42,32 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ">"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "fasta_header_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fasta_header_content"
         },
         {
           "type": "SYMBOL",
           "name": "eol"
         }
       ]
+    },
+    "fasta_header_prefix": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ">"
+      }
+    },
+    "fasta_header_content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\r\\n]*"
+      }
     },
     "fasta_sequence_line": {
       "type": "SEQ",
@@ -104,26 +110,32 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "@"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "fastq_header_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "fastq_header_content"
         },
         {
           "type": "SYMBOL",
           "name": "eol"
         }
       ]
+    },
+    "fastq_header_prefix": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "@"
+      }
+    },
+    "fastq_header_content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\r\\n]*"
+      }
     },
     "fastq_sequence_line": {
       "type": "SEQ",
@@ -145,26 +157,40 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "+"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "fastq_plus_prefix"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "fastq_plus_content"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
           "name": "eol"
         }
       ]
+    },
+    "fastq_plus_prefix": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "+"
+      }
+    },
+    "fastq_plus_content": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\r\\n]*"
+      }
     },
     "fastq_quality_line": {
       "type": "SEQ",

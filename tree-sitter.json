@@ -6,11 +6,10 @@
       "camelcase": "Seq",
       "title": "Biological Sequence Grammar",
       "scope": "source.seq",
-      "file-types": [
-        "seq"
-      ],
-      "injection-regex": "^seq$",
-      "class-name": "TreeSitterSeq"
+      "file-types": ["fa", "fasta", "fna", "fq", "fastq"],
+      "injection-regex": ".*\\.(fa|fasta|fna|fq|fastq)$",
+      "class-name": "TreeSitterSeq",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {

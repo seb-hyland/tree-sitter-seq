@@ -4,15 +4,28 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "eol",
           "named": true
+        },
+        {
+          "type": "fasta_header_content",
+          "named": true
+        },
+        {
+          "type": "fasta_header_prefix",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "fasta_header_content",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "fasta_record",
@@ -53,26 +66,52 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "eol",
+          "named": true
+        },
+        {
+          "type": "fastq_header_content",
+          "named": true
+        },
+        {
+          "type": "fastq_header_prefix",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "fastq_header_content",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "fastq_plus_content",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "fastq_plus_line",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "eol",
+          "named": true
+        },
+        {
+          "type": "fastq_plus_content",
+          "named": true
+        },
+        {
+          "type": "fastq_plus_prefix",
           "named": true
         }
       ]
@@ -157,6 +196,18 @@
   },
   {
     "type": "eol",
+    "named": true
+  },
+  {
+    "type": "fasta_header_prefix",
+    "named": true
+  },
+  {
+    "type": "fastq_header_prefix",
+    "named": true
+  },
+  {
+    "type": "fastq_plus_prefix",
     "named": true
   }
 ]

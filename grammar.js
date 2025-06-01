@@ -8,7 +8,7 @@
 // @ts-check
 
 module.exports = grammar({
-  name: "tree_sitter_seq",
+  name: "seq",
 
   // Don’t skip whitespace or newlines automatically—newlines are significant in FASTA/FASTQ
   extras: () => [],
@@ -28,7 +28,11 @@ module.exports = grammar({
     fasta_record: ($) => seq($.fasta_header, repeat1($.fasta_sequence_line)),
 
     // A FASTA header: ‘>’, then any non-newline characters, then EOL
-    fasta_header: ($) => seq(token(seq(">", /[^\r\n]*/)), $.eol),
+    fasta_header: ($) =>
+      seq($.fasta_header_prefix, $.fasta_header_content, $.eol),
+    fasta_header_prefix: ($) => token(">"),
+    fasta_header_content: ($) => token(/[^\r\n]*/),
+
     // A FASTA sequence line: one or more ASCII letters (uppercase or lowercase), then EOL
     fasta_sequence_line: ($) => seq(token(/[A-Za-z]+/), $.eol),
 
@@ -46,11 +50,20 @@ module.exports = grammar({
       ),
 
     // A FASTQ header: ‘@’, then any non-newline characters, then EOL
-    fastq_header: ($) => seq(token(seq("@", /[^\r\n]*/)), $.eol),
+    fastq_header: ($) =>
+      seq($.fastq_header_prefix, $.fastq_header_content, $.eol),
+    fastq_header_prefix: ($) => token("@"),
+    fastq_header_content: ($) => token(/[^\r\n]*/),
+
     // A FASTQ sequence line: one or more ASCII letters (uppercase or lowercase), then EOL
     fastq_sequence_line: ($) => seq(token(/[A-Za-z]+/), $.eol),
+
     // A FASTQ plus line: ‘+’, then any non-newline characters (optional), then EOL
-    fastq_plus_line: ($) => seq(token(seq("+", /[^\r\n]*/)), $.eol),
+    fastq_plus_line: ($) =>
+      seq($.fastq_plus_prefix, optional($.fastq_plus_content), $.eol),
+    fastq_plus_prefix: ($) => token("+"),
+    fastq_plus_content: ($) => token(/[^\r\n]*/),
+
     // A FASTQ quality line: one or more ASCII characters in range 33–126, then EOL
     fastq_quality_line: ($) => seq(token(/[\x21-\x7E]+/), $.eol),
 
