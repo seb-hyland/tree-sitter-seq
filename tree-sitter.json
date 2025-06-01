@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "seq",
+      "camelcase": "Seq",
+      "title": "Biological Sequence Grammar",
+      "scope": "source.seq",
+      "file-types": [
+        "seq"
+      ],
+      "injection-regex": "^seq$",
+      "class-name": "TreeSitterSeq"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for biological sequence formats (FASTA, FASTQ)",
+    "authors": [
+      {
+        "name": "Sebastian Hyland",
+        "email": "st.hyland05@gmail.com",
+        "url": "https://seb-hyland.github.io/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/seb-hyland/tree-sitter-seq"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

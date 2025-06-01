@@ -1,0 +1,162 @@
+[
+  {
+    "type": "fasta_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fasta_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fasta_header",
+          "named": true
+        },
+        {
+          "type": "fasta_sequence_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fasta_sequence_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fastq_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fastq_plus_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fastq_quality_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fastq_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fastq_header",
+          "named": true
+        },
+        {
+          "type": "fastq_plus_line",
+          "named": true
+        },
+        {
+          "type": "fastq_quality_line",
+          "named": true
+        },
+        {
+          "type": "fastq_sequence_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fastq_sequence_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fasta_record",
+          "named": true
+        },
+        {
+          "type": "fastq_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "eol",
+    "named": true
+  }
+]
