@@ -28,6 +28,11 @@
     "fields": {}
   },
   {
+    "type": "fasta_letters",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "fasta_record",
     "named": true,
     "fields": {},
@@ -51,11 +56,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "eol",
+          "named": true
+        },
+        {
+          "type": "fasta_gap",
+          "named": true
+        },
+        {
+          "type": "fasta_letters",
           "named": true
         }
       ]
@@ -196,6 +209,10 @@
   },
   {
     "type": "eol",
+    "named": true
+  },
+  {
+    "type": "fasta_gap",
     "named": true
   },
   {

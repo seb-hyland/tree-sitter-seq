@@ -73,10 +73,19 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "REPEAT1",
           "content": {
-            "type": "PATTERN",
-            "value": "[A-Za-z]+"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "fasta_letters"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "fasta_gap"
+              }
+            ]
           }
         },
         {
@@ -84,6 +93,20 @@
           "name": "eol"
         }
       ]
+    },
+    "fasta_letters": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Za-z]+"
+      }
+    },
+    "fasta_gap": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "-"
+      }
     },
     "fastq_record": {
       "type": "SEQ",

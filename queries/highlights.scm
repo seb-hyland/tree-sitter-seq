@@ -2,7 +2,9 @@
   (fasta_header_prefix)
   (fastq_header_prefix)
   (fastq_plus_prefix)
-] @punctuation.delimiter
+] @punctuation.list_marker
+
+(fasta_gap) @punctuation.delimeter
 
 [
   (fasta_header_content)
@@ -11,7 +13,7 @@
 ] @keyword
 
 [
-  (fasta_sequence_line)
+  (fasta_letters)
   (fastq_sequence_line)
 ] @string
 
